@@ -1,0 +1,58 @@
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.category-badge {
+    display: inline-block;
+    padding: 0.5em 1em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
+    color: #fff;
+}
+
+.category-Prozessdesign-Grundlagen { background-color: #007bff; }
+.category-Prozessdesign-Fortgeschritten { background-color: #6c757d; }
+.category-Installation { background-color: #28a745; }
+.category-Administration { background-color: #17a2b8; }
+.category-Vertriebsschulung { background-color: #ffc107; }
+.category-Neuerungen { background-color: #dc3545; }
+.category-Rezertifizierung { background-color: #f8f9fa; }
+.category-Module { background-color: #343a40; }
+
+.card {
+    border-radius: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    padding: 20px;
+}
+
+.card-text {
+    margin-top: 20px;
+    font-size: 1.2em;
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.comment-submit {
+    margin-bottom: 20px;
+}
+
+.search-box {
+    position: relative;
+}
+
+.search-box input {
+    padding-right: 30px;
+}
+
+.search-box label {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}

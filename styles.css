@@ -1,5 +1,33 @@
 body {
     font-family: 'Source Sans Pro', sans-serif;
+    background-color: #f0f0f0;
+}
+
+h2 {
+    background-color: #3b3e4d;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+
+.container {
+    background-color: #fff; 
+    padding: 20px; 
+    border-radius: 5px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    margin-top: 20px; 
+    margin-bottom: 20px; 
+}
+
+.navbar {
+    background-color: #3b3e4d !important;
+    color: #fff;
+}
+
+.navbar .navbar-brand,
+.navbar .nav-link {
+    color: #ffffff !important;
 }
 
 .category-badge {
@@ -30,13 +58,13 @@ body {
     padding: 20px;
 }
 
-.card-text {
-    margin-top: 20px;
-    font-size: 1.2em;
-    background-color: #f8f9fa;
-    padding: 10px;
-    border-radius: 5px;
+.vote-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 0.8em;
 }
+
 
 .comment-submit {
     margin-bottom: 20px;
@@ -46,13 +74,19 @@ body {
     position: relative;
 }
 
-.search-box input {
-    padding-right: 30px;
+.search-box input[type="text"] {
+    padding-right: 30px; 
+    border-radius: 20px; 
+    border: 1px solid #ced4da; 
 }
 
-.search-box label {
+.search-box i {
     position: absolute;
     right: 10px;
     top: 50%;
     transform: translateY(-50%);
+    color: #495057; 
+    pointer-events: none; 
 }
+
+

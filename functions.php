@@ -9,11 +9,12 @@ function vote($id) {
     $stmt->execute();
 }
 
-// Funktion zum Hinzufügen einer neuen Idee
-function addIdea($idea, $category_id) {
+// Funktion zum Hinzufügen einer neuen Idee mit Beschreibung
+function addIdea($idea, $description, $category_id) {
     global $conn;
-    $stmt = $conn->prepare("INSERT INTO ideas (idea, category_id) VALUES (:idea, :category_id)");
+    $stmt = $conn->prepare("INSERT INTO ideas (idea, description, category_id) VALUES (:idea, :description, :category_id)");
     $stmt->bindParam(':idea', $idea);
+    $stmt->bindParam(':description', $description);
     $stmt->bindParam(':category_id', $category_id);
     $stmt->execute();
 }

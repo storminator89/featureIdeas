@@ -11,12 +11,13 @@ try {
     )");
 
     $conn->exec("CREATE TABLE IF NOT EXISTS ideas (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        category_id INTEGER,
-        idea TEXT NOT NULL,
-        votes INTEGER DEFAULT 0,
-        FOREIGN KEY (category_id) REFERENCES categories(id)
-    )");
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    category_id INTEGER,
+    idea TEXT NOT NULL,
+    description TEXT NOT NULL,
+    votes INTEGER DEFAULT 0,
+    FOREIGN KEY (category_id) REFERENCES categories(id)
+)");
 
     $conn->exec("CREATE TABLE IF NOT EXISTS comments (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -24,8 +25,7 @@ try {
         comment TEXT NOT NULL,
         FOREIGN KEY (idea_id) REFERENCES ideas(id)
     )");
-
-} catch(PDOException $e) {
+} catch (PDOException $e) {
     die("Verbindung fehlgeschlagen: " . $e->getMessage());
 }
 
@@ -47,5 +47,3 @@ foreach ($categories as $category) {
     $stmt->bindParam(':name', $category);
     $stmt->execute();
 }
-
-?>

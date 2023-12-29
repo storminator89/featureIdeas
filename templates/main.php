@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Feature-Ideen-Board</title>    
+    <title>Feature-Ideen-Board</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -43,8 +43,7 @@
 
         </div>
 
-        <form method="post" class="mb-4 needs-validation" novalidate>
-            <form method="post" class="mb-4 needs-validation" novalidate>
+            <form id="ideaForm" method="post" class="mb-4 needs-validation" novalidate>
                 <div class="form-group">
                     <label for="category"><i class="fas fa-tags"></i> Kategorie:</label>
                     <select name="category" id="category" class="form-control" required>
@@ -80,24 +79,27 @@
                 <div class="row">
                     <?php foreach ($ideas as $row) : ?>
                         <?php if ($row['category_id'] == $category['id']) : ?>
-                            <div class="col-md-4 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <div class="card">
-                                    <div class="card-body position-relative">
-                                        <div class="d-flex justify-content-between align-items-start">
-                                            <h5 class="card-title mb-0"><i class="fas fa-lightbulb"></i> <?= htmlspecialchars($row["idea"]) ?></h5>
-                                            <div class="d-flex align-items-center vote-section">
-                                                <span class="badge badge-dark vote-badge"><?= $row["votes"] ?></span>
-                                                <?php if (!hasVoted($row["id"])) : ?>
-                                                    <form method="post">
-                                                        <button type="submit" name="vote" value="<?= $row["id"] ?>" class="btn btn-success ml-2"><i class="fas fa-thumbs-up"></i></button>
-                                                    </form>
-                                                <?php else : ?>
-                                                    <button class="btn btn-dark ml-2" disabled data-toggle="tooltip" data-placement="top" title="Sie haben bereits gevotet"><i class="fas fa-thumbs-up"></i></button>
-                                                <?php endif; ?>
-                                            </div>
+                                    <div class="card-header">
+                                        <h5 class="card-title mb-0"><i class="fas fa-lightbulb" style="margin-right: 10px;"></i><?= htmlspecialchars($row["idea"]) ?></h5>
+                                        <div class="vote-counter">
+                                            <span class="badge badge-custom"><?= $row["votes"] ?> Stimmen</span>
                                         </div>
+                                    </div>
+                                    <div class="card-body">
                                         <span class="category-badge category-<?= str_replace(' ', '-', $row["category_name"]) ?>"><?= htmlspecialchars($row["category_name"]) ?></span>
+                                        <i class="fas fa-tag"></i>
                                         <p class="card-text"><?= $row["description"] ?></p>
+                                        <div class="vote-section">
+                                            <?php if (!hasVoted($row["id"])) : ?>
+                                                <form method="post">
+                                                    <button type="submit" name="vote" value="<?= $row["id"] ?>" class="btn btn-success"><i class="fas fa-thumbs-up"></i> Abstimmen</button>
+                                                </form>
+                                            <?php else : ?>
+                                                <button class="btn btn-dark" disabled data-toggle="tooltip" data-placement="top" title="Sie haben bereits abgestimmt"><i class="fas fa-thumbs-up"></i></button>
+                                            <?php endif; ?>
+                                        </div>
                                     </div>
                                     <div class="card-footer">
                                         <form method="post">
@@ -113,13 +115,34 @@
                                         <?php endforeach; ?>
                                     </div>
                                 </div>
-
                             </div>
+
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </div>
             <?php endforeach; ?>
     </div>
+
+    <!-- Dankes-Popup Modal -->
+    <div class="modal fade" id="dankesPopup" tabindex="-1" role="dialog" aria-labelledby="dankesPopupLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="dankesPopupLabel">Vielen Dank!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Schließen">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Vielen Dank für Ihre Ideeneinreichung. Wir schätzen Ihr Engagement und Ihre Kreativität!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Schließen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 
 </html>

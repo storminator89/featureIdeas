@@ -4,21 +4,25 @@ body {
 }
 
 h2 {
-    background-color: #3b3e4d;
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
+    background-color: #3b3e4d; 
+    color: #ffffff; 
+    padding: 0.5rem 1rem; 
+    margin-top: 2rem;
+    margin-bottom: 1rem; 
+    border-radius: 0.25rem;
 }
 
 
-.container {
-    background-color: #fff; 
+.container {    
     padding: 20px; 
     border-radius: 5px; 
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
     margin-top: 20px; 
     margin-bottom: 20px; 
+    background-color: #f8f9fa; 
+    padding: 2rem; 
 }
+
 
 .navbar {
     background-color: #3b3e4d !important;
@@ -55,20 +59,48 @@ h2 {
 .card {
     border-radius: 15px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    padding: 20px;
+    margin: 20px;
+}
+
+.card-header {
+    background-color: #3b3e4d;
+    color: #ffffff; 
+    padding: 0.5rem 1rem; 
+    border-radius: 15px;
+}
+
+.card-title {
+    background-color: #3b3e4d; 
+    color: #ffffff; 
+    padding: 0.5rem 1rem; 
+    border-radius: 15px;
+    margin: -1rem -1rem 1rem -1rem; 
 }
 
 .vote-badge {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 0.8em;
+    top: 1px;
+    right: 1px;
+}
+
+.badge-custom {
+    background-color: #b54141;
+    color: #ffffff;
 }
 
 
 .comment-submit {
+    background-color: #b54141;
+    border-color: #b54141;
+    color: #ffffff; 
     margin-bottom: 20px;
 }
+
+.comment-submit:hover {
+    background-color: #a23737; 
+    border-color: #a23737; 
+}
+
 
 .search-box {
     position: relative;
@@ -87,6 +119,16 @@ h2 {
     transform: translateY(-50%);
     color: #495057; 
     pointer-events: none; 
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal.fade .modal-dialog {
+    animation-name: fadeIn;
+    animation-duration: 1s;
 }
 
 

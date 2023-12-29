@@ -50,4 +50,18 @@ $(document).ready(function() {
             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
         });
     });
+
+    $('#ideaForm').on('submit', function(e) {
+        // Zeigen Sie das Modal an
+        $('#dankesPopup').modal('show');
+
+        // Verzögern Sie das tatsächliche Absenden des Formulars
+        setTimeout(function() {
+            // Lassen Sie das Formular absenden
+            e.target.submit();
+        }, 4000); // Verzögerung von 2 Sekunden
+
+        // Verhindern Sie das sofortige Absenden des Formulars
+        return false;
+    });
 });

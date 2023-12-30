@@ -35,7 +35,7 @@
 
     <div class="container mt-4">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1 class="display-3"><img src="assets/img/featureLogo_small.png" alt="Logo" style="height: 64px; width: 64x;"> Academy Ideen-Board</h1>
+            <h1 class="display-3"><img src="assets/img/featureLogo_small.png" alt="Logo" style="height: 80px; width: 80x;"> Academy Ideen-Board</h1>
             <div class="form-group search-box">
                 <input type="text" id="search" placeholder="Suche...">
                 <i class="fas fa-search"></i>
@@ -43,9 +43,10 @@
 
         </div>
 
-            <form id="ideaForm" method="post" class="mb-4 needs-validation" novalidate>
-                <div class="form-group">
-                    <label for="category"><i class="fas fa-tags"></i> Kategorie:</label>
+        <form id="ideaForm" method="post" class="mb-4 needs-validation" novalidate>
+            <div class="form-group row">
+                <label for="category" class="col-sm-2 col-form-label"><i class="fas fa-tags"></i> Kategorie:</label>
+                <div class="col-sm-10">
                     <select name="category" id="category" class="form-control" required>
                         <option value="">Bitte wählen</option>
                         <?php foreach ($categories as $category) : ?>
@@ -54,73 +55,71 @@
                     </select>
                     <div class="invalid-feedback">Bitte eine Kategorie auswählen.</div>
                 </div>
-                <div class="form-group">
-                    <label for="idea"><i class="fas fa-pencil-alt"></i> Idee:</label>
+            </div>
+            <div class="form-group row">
+                <label for="idea" class="col-sm-2 col-form-label"><i class="fas fa-pencil-alt"></i> Idee:</label>
+                <div class="col-sm-10">
                     <input type="text" name="idea" id="idea" class="form-control" required>
                     <div class="invalid-feedback">Bitte eine Idee eingeben.</div>
                 </div>
-                <div class="form-group">
-                    <label for="description"><i class="fas fa-pencil-alt"></i> Beschreibung:</label>
+            </div>
+            <div class="form-group row">
+                <label for="description" class="col-sm-2 col-form-label"><i class="fas fa-pencil-alt"></i> Beschreibung:</label>
+                <div class="col-sm-10">
                     <textarea name="description" id="description" class="form-control summernote" required></textarea>
                     <div class="invalid-feedback">Bitte eine Beschreibung eingeben.</div>
                 </div>
+            </div>
+            <button type="submit" class="btn btn-primary comment-submit mb-2"><i class="fas fa-plus"></i> Idee einreichen</button>
+        </form>
 
-                <button type="submit" class="btn btn-primary mb-2"><i class="fas fa-plus"></i> Idee einreichen</button>
-                <div class="sort-options d-flex align-items-center">
-                    <label for="sort-by-votes" class="mr-4 mb-0">Sortierung:</label>
-                    <select id="sort-by-votes" class="form-control">
-                        <option value="most-voted">Meist gevotet</option>
-                        <option value="least-voted">Wenigst gevotet</option>
-                    </select>
-                </div>
-            </form>
-            <?php foreach ($categories as $category) : ?>
-                <h2 class="mt-4"><?= htmlspecialchars($category['name']) ?></h2>
-                <div class="row">
-                    <?php foreach ($ideas as $row) : ?>
-                        <?php if ($row['category_id'] == $category['id']) : ?>
-                            <div class="col-md-6 mb-3">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h5 class="card-title mb-0"><i class="fas fa-lightbulb" style="margin-right: 10px;"></i><?= htmlspecialchars($row["idea"]) ?></h5>
-                                        <div class="vote-counter">
-                                            <span class="badge badge-custom"><?= $row["votes"] ?> Stimmen</span>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <span class="category-badge category-<?= str_replace(' ', '-', $row["category_name"]) ?>"><?= htmlspecialchars($row["category_name"]) ?></span>
-                                        <i class="fas fa-tag"></i>
-                                        <p class="card-text"><?= $row["description"] ?></p>
-                                        <div class="vote-section">
-                                            <?php if (!hasVoted($row["id"])) : ?>
-                                                <form method="post">
-                                                    <button type="submit" name="vote" value="<?= $row["id"] ?>" class="btn btn-success"><i class="fas fa-thumbs-up"></i> Abstimmen</button>
-                                                </form>
-                                            <?php else : ?>
-                                                <button class="btn btn-dark" disabled data-toggle="tooltip" data-placement="top" title="Sie haben bereits abgestimmt"><i class="fas fa-thumbs-up"></i></button>
-                                            <?php endif; ?>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer">
-                                        <form method="post">
-                                            <div class="form-group">
-                                                <label for="comment"><i class="fas fa-comments"></i> Kommentar:</label>
-                                                <textarea name="comment" id="comment" class="form-control" rows="2"></textarea>
-                                            </div>
-                                            <input type="hidden" name="idea_id" value="<?= $row['id'] ?>">
-                                            <button type="submit" class="btn btn-secondary comment-submit"><i class="fas fa-plus"></i> Kommentar absenden</button>
-                                        </form>
-                                        <?php foreach (getCommentsByIdea($row['id']) as $comment) : ?>
-                                            <p><i class="fas fa-comment"></i> <?= htmlspecialchars($comment['comment']) ?></p>
-                                        <?php endforeach; ?>
+        <?php foreach ($categories as $category) : ?>
+            <h2 class="mt-4"><?= htmlspecialchars($category['name']) ?></h2>
+            <div class="row">
+                <?php foreach ($ideas as $row) : ?>
+                    <?php if ($row['category_id'] == $category['id']) : ?>
+                        <div class="col-md-6 mb-3">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0"><i class="fas fa-lightbulb" style="margin-right: 10px;"></i><?= htmlspecialchars($row["idea"]) ?></h5>
+                                    <div class="vote-counter">
+                                        <span class="badge badge-custom"><?= $row["votes"] ?> Stimmen</span>
                                     </div>
                                 </div>
+                                <div class="card-body">
+                                    <span class="category-badge category-<?= str_replace(' ', '-', $row["category_name"]) ?>"><?= htmlspecialchars($row["category_name"]) ?></span>
+                                    <i class="fas fa-tag"></i>
+                                    <p class="card-text"><?= $row["description"] ?></p>
+                                    <div class="vote-section">
+                                        <?php if (!hasVoted($row["id"])) : ?>
+                                            <form method="post">
+                                                <button type="submit" name="vote" value="<?= $row["id"] ?>" class="btn btn-success"><i class="fas fa-thumbs-up"></i> Abstimmen</button>
+                                            </form>
+                                        <?php else : ?>
+                                            <button class="btn btn-dark" disabled data-toggle="tooltip" data-placement="top" title="Sie haben bereits abgestimmt"><i class="fas fa-thumbs-up"></i></button>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <form method="post">
+                                        <div class="form-group">
+                                            <label for="comment"><i class="fas fa-comments"></i> Kommentar:</label>
+                                            <textarea name="comment" id="comment" class="form-control" rows="2"></textarea>
+                                        </div>
+                                        <input type="hidden" name="idea_id" value="<?= $row['id'] ?>">
+                                        <button type="submit" class="btn btn-secondary comment-submit"><i class="fas fa-plus"></i> Kommentar absenden</button>
+                                    </form>
+                                    <?php foreach (getCommentsByIdea($row['id']) as $comment) : ?>
+                                        <p><i class="fas fa-comment"></i> <?= htmlspecialchars($comment['comment']) ?></p>
+                                    <?php endforeach; ?>
+                                </div>
                             </div>
+                        </div>
 
-                        <?php endif; ?>
-                    <?php endforeach; ?>
-                </div>
-            <?php endforeach; ?>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </div>
+        <?php endforeach; ?>
     </div>
 
     <!-- Dankes-Popup Modal -->
